@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Checking some basic WS before moving forward</title>
+    <title>SocketIO</title>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
@@ -17,62 +17,20 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- CDN -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.js"></script> -->
     <!-- Served from node server -->
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      const _serverUrl = 'http://localhost:5001'
-      const _socketIoConnection = io(_serverUrl)
+    <script src="./script.js"></script>
 
-      console.log({ _socketIoConnection })
-
-      _socketIoConnection.on('connect', event => {
-        console.log({ message: 'connection made', id: _socketIoConnection.id })
-      })
-
-      _socketIoConnection.on('server-message', messageInfo => {
-        console.log({
-          message: 'a new message received from server',
-          messageInfo
-        })
-      })
-
-      _socketIoConnection.on('newMessage_FromServer', message => {
-        console.log({ newMessage_FromServer: message })
-        $('#messages').append(`<li>${message}</li>`)
-      })
-
-      $(document).ready(() => {
-        $('#form').submit(e => {
-          e.preventDefault()
-
-          const value = $('input').val()
-
-          _socketIoConnection.emit('newMessage_FromClient', {
-            text: value
-          })
-        })
-      })
-
-      const sendTestMessage = () => {
-        // const mes = prompt('Enter a message', 'no message was added.')
-
-        _socketIoConnection.emit('any-key-will-do', {
-          any: 'any type of data will be valid.'
-        })
-      }
-    </script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div class="container">
-      <!-- <button onclick="sendTestMessage()">Send Message</button> -->
       <!-- form -->
       <form id="form">
         <div class="form-group">
